@@ -16,8 +16,8 @@ namespace InfotrackTest
             // Register IWebDriver as a singleton
             builder.Services.AddSingleton<IWebDriver>(provider => WebDriverFactory.CreateChromeDriver());
 
-            // Register GoogleSearchNavigator
-            builder.Services.AddTransient<GoogleSearchNavigator>();
+            // Register ISearchNavigator and its implementation
+            builder.Services.AddTransient<ISearchNavigator, GoogleSearchNavigator>();
 
             // Register IHtmlFetcher and its implementation
             builder.Services.AddTransient<IHtmlFetcher, GoogleSeleniumHtmlFetcher>();

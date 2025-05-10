@@ -1,6 +1,29 @@
 @InfotrackTest_HostAddress = http://localhost:5063
 
-GET {{InfotrackTest_HostAddress}}/weatherforecast/
+### Get OpenAPI Specification
+GET http://localhost:5000/swagger/v1/swagger.json
 Accept: application/json
 
 ###
+
+### Get SEO Positions
+GET http://localhost:5000/api/SeoStats/positions?keywords=land&keywords=registry&keywords=search&subjectUrl=infotrack.co.uk
+Accept: application/json
+
+###
+
+### Example: Invalid Request (Missing Parameters)
+GET http://localhost:5000/api/SeoStats/positions
+Accept: application/json
+
+###
+
+### Example: Invalid Request (Empty Keywords)
+GET http://localhost:5000/api/SeoStats/positions?keywords=&subjectUrl=infotrack.co.uk
+Accept: application/json
+
+###
+
+### Example: Invalid Request (Empty Subject URL)
+GET http://localhost:5000/api/SeoStats/positions?keywords=land&keywords=registry&keywords=search&subjectUrl=
+Accept: application/json
