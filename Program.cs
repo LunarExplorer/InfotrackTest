@@ -1,6 +1,6 @@
-using InfotrackTest;
+using InfotrackTest.Google;
+using InfotrackTest.Interfaces;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 
 namespace InfotrackTest
 {
@@ -14,19 +14,13 @@ namespace InfotrackTest
             builder.Services.AddControllers();
 
             // Register IWebDriver as a singleton
-            builder.Services.AddSingleton<IWebDriver>(provider =>
-            {
-                var options = new ChromeOptions();
-                options.AddArgument("--disable-gpu");
-                options.AddArgument("--no-sandbox");
-                options.AddArgument("--profile-directory=Default");
+            builder.Services.AddSingleton<IWebDriver>(provider => WebDriverFactory.CreateChromeDriver());
 
-                var service = ChromeDriverService.CreateDefaultService("C:\\Program Files\\Selenium\\chromedriver-win64\\");
-                return new ChromeDriver(service, options);
-            });
+            // Register GoogleSearchNavigator
+            builder.Services.AddTransient<GoogleSearchNavigator>();
 
             // Register IHtmlFetcher and its implementation
-            builder.Services.AddTransient<IHtmlFetcher, SeleniumHtmlFetcher>();
+            builder.Services.AddTransient<IHtmlFetcher, GoogleSeleniumHtmlFetcher>();
 
             // Register ISeoStatsProvider and its implementation
             builder.Services.AddTransient<ISeoStatsProvider, GoogleSEOStatsProvider>();

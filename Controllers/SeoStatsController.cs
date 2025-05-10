@@ -1,3 +1,4 @@
+using InfotrackTest.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InfotrackTest.Controllers
